@@ -37,7 +37,7 @@ areas[['Name','region','geometry']].to_json()
 
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
-credentials = Credentials.from_service_account_file('sigrid-1362-f23b3afad1e2.json', scopes=scope)
+credentials = Credentials.from_service_account_file('/Users/sigrid/Documents/Better_SG/Covid_Dorms/sigrid-1362-f23b3afad1e2.json', scopes=scope)
 gc = gspread.authorize(credentials)
 dorms = gc.open("dorms numbers")
 
@@ -270,6 +270,7 @@ area_data2.head()
 chart2 = go.Figure()
 
 acol = magma(area_data.shape[1]-2)[::-1]
+area_data['tooltip'] = [x.strftime("%d %b") for x in area_data['date']]
 
 for i in reversed(range(area_data.shape[1]-2)):
     yname = area_data.drop(['date','tooltip'], axis = 1).columns[i]
